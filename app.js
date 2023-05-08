@@ -57,10 +57,11 @@ app.post('/api/v1/tours', (req, res) => {
     tours.push(newTour);
 
     fs.writeFile(`${__dirname}/dev-data/data/tours-simple.json`, JSON.stringify(tours), err => {
+        //status 201 === add data
         res.status(201).json({
             status: 'success',
             data: { tour: newTour }
-        })
+        });
     })//not writeFileSync because we dont want to block eventLoop, we are in the callback f!!!
     // res.send('Done');
 });
@@ -77,8 +78,22 @@ app.patch('/api/v1/tours/:id', (req, res) => {
         data: {
             tour: '<updated tour>'
         }
-    })
-})
+    });
+});
+
+app.delete('/api/v1/tours/:id', (req, res) => {
+    if (req.params.id * 1 > tours.length) {
+        return res.status(404).json({
+            status: 'fail',
+            message: 'invalid ID'
+        });
+    };
+    //status 204 ===no contetn
+    res.status(204).json({
+        status: 'success',
+        data: null
+    });
+});
 
 const port = 3000;
 app.listen(port, () => {
