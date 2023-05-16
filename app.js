@@ -8,13 +8,20 @@ app.use(express.json());//middleware
 app.use((req, res, next) => {
     console.log('Hello from MW');
     next();
-})
+});
+
+app.use((req, res, next) => {
+    req.requestTime = new Date().toISOString();
+    next();
+});
 
 const tours = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`))
 
 const getAllTours = (req, res) => {
+    console.log(req.requestTime);
     res.status(200).json({
         status: 'success',
+        requestedAt: req.requestTime,
         result: tours.length,//if we are sending an arr
         data: { tours: tours }
     });
