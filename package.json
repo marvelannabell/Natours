@@ -4,7 +4,7 @@
   "description": "Learning node, express, mongoDB",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon"
+    "start": "nodemon server.js"
   },
   "author": "Veli",
   "license": "ISC",
