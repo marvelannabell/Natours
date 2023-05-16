@@ -5,6 +5,11 @@ const { createVerify } = require('crypto');
 const app = express();
 app.use(express.json());//middleware
 
+app.use((req, res, next) => {
+    console.log('Hello from MW');
+    next();
+})
+
 const tours = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`))
 
 const getAllTours = (req, res) => {
