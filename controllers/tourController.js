@@ -13,6 +13,16 @@ exports.checkID = (req, res, next, val) => {
     next();
 };
 
+exports.checkBody = (req, res, next) => {
+    if (!req.body.name || !req.body.price) {
+        return res.status(404).json({
+            status: 'fail',
+            message: 'Name and price are required!'
+        });
+    };
+    next();
+};
+
 
 exports.getAllTours = (req, res) => {
     console.log(req.requestTime);
@@ -30,7 +40,7 @@ exports.getOneTour = (req, res) => {
     const tour = tours.find(x => x.id === id);
 
     // if (id > tours.length) {
-   
+
 
     res.status(200).json({
         status: 'success',
@@ -58,7 +68,7 @@ exports.createTour = (req, res) => {
 };
 
 exports.updateTour = (req, res) => {
- 
+
     res.status(200).json({
         status: 'success',
         data: {
