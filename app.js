@@ -1,8 +1,8 @@
 const express = require('express');
 const morgan = require('morgan');
 
-const tourRouter = require('./routes/tourRoute');
-const userRouter =require('./routes/userRoute');
+const tourRouter = require('./routes/tourRoutes');
+const userRouter =require('./routes/userRoutes');
 
 const app = express();
 //1) MWs
@@ -23,11 +23,7 @@ app.use((req, res, next) => {
 app.use('/api/v1/tours', tourRouter);//MW
 app.use('/api/v1/users', userRouter);//MW
 
+module.exports = app;
 
 
-//4.)Start Server;
-const port = 3000;
-app.listen(port, () => {
-    console.log(`app running on port ${port}`);
-});
 
